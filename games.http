@@ -3,3 +3,17 @@ GET http://localhost:5109/games
 ###
 
 GET http://localhost:5109/games/1
+
+
+###
+POST http://localhost:5109/games
+
+Content-Type: application/json
+
+{
+  title: "Grand Theft Auto 5",
+  Genre: "Action",
+  Price: 50,
+  ReleaseDate: "2013-09-17"
+}
+
