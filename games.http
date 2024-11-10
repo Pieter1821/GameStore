@@ -10,10 +10,10 @@ POST http://localhost:5109/games
 Content-Type: application/json
 
 {
-  
-  "Genre": "Action",
-  "Price": 50,
-  "ReleaseDate": "2013-09-17"
+  "Title": "MineCraft",
+  "Genre": "Kids and family",
+  "Price": 119.99,
+  "ReleaseDate": "2011-11-18"
 }
 
 
@@ -23,7 +23,7 @@ Content-Type: application/json
 
  {
     "id": 1,
-    "Title": "Super Mario Bros Turbo.",
+   
     "genre": "Platformer",
     "price": 30,
     "releaseDate": "1985-09-13"
