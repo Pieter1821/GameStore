@@ -5,6 +5,8 @@ using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+
 // Load environment variables from .env file
 Env.Load();
 
@@ -19,5 +21,7 @@ builder.Services.AddSqlite<GameStoreContext>(connString);
 var app = builder.Build();
 
 app.MapGamesEndpoints();
+
+app.MigrateDb();
 
 app.Run();
