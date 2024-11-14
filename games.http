@@ -9,11 +9,14 @@ GET http://localhost:5109/games/1
 POST http://localhost:5109/games
 Content-Type: application/json
 
+
+
 {
-  "Name": "Doom",
-  "GenreId": 5,
-  "Price": 40 ,
-  "ReleaseDate": "1993-12-10"
+  "name" : "Halo: Combat Evolved",
+   "genreId": 1,
+   "price": 29.99,
+   "releaseDate": "2001-11-15"
+
 }
 
 
