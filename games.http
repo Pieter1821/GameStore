@@ -10,10 +10,10 @@ POST http://localhost:5109/games
 Content-Type: application/json
 
 {
-  "Title": "MineCraft",
-  "Genre": "Kids and family",
-  "Price": 119.99,
-  "ReleaseDate": "2011-11-18"
+  "Name": "Doom",
+  "GenreId": 5,
+  "Price": 40 ,
+  "ReleaseDate": "1993-12-10"
 }
 
 
