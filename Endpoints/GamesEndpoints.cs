@@ -11,7 +11,7 @@ namespace GameStore.API.Endpoints
     {
         const string GetGameEndpointName = "GetGame";
 
-        private static readonly List<GameDto> games = new()
+        private static readonly List<GameSummaryDto> games = new()
                     {
                         new (1, "Super Mario Bros.", "Platformer", 29.99m, new DateOnly(1985, 9, 13)),
                         new (2, "The Legend of Zelda", "Action-adventure", 49.99m, new DateOnly(1986, 2, 21)),
@@ -30,10 +30,12 @@ namespace GameStore.API.Endpoints
             group.MapGet("/", () => games);
 
             // GET /games/1
-            group.MapGet("/{id}", (int id) =>
+            group.MapGet("/{id}", (int id , GameStoreContext dbContext) =>
             {
-                GameDto? game = games.Find(game => game.Id == id);
-                return game is null ? Results.NotFound() : Results.Ok(game);
+                Game? game = dbContext.Games.Find(id);
+                
+                return game is null ? 
+                              Results.NotFound() : Results.Ok(game.ToGameDetailsDto());
             })
             .WithName(GetGameEndpointName);
 
@@ -42,12 +44,12 @@ namespace GameStore.API.Endpoints
 
             {
                 Game game = newGame.ToEntity();
-                game.Genre = dbContext.Genres.Find(newGame.GenreId);
+              
 
                 dbContext.Games.Add(game);
                 dbContext.SaveChanges();
 
-                return Results.CreatedAtRoute(GetGameEndpointName, new { id = game.Id }, game.ToDto());
+                return Results.CreatedAtRoute(GetGameEndpointName, new { id = game.Id }, game.ToGameDetailsDto());
             });
 
             // PUT /games/1
@@ -58,7 +60,7 @@ namespace GameStore.API.Endpoints
                {
                    return Results.NotFound();
                }
-               games[index] = new GameDto(
+               games[index] = new GameSummaryDto(
                    id,
                    updatedGame.Name,
                    updatedGame.Genre,
